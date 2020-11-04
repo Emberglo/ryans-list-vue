@@ -1,6 +1,6 @@
 <template>
-  <div class="cars-page container-fluid">
-    <h1>Cars</h1>
+  <div class="houses-page container-fluid">
+    <h1>Homes</h1>
     <!-- Button trigger modal -->
     <button type="button"
     class="btn btn-primary"
@@ -14,51 +14,57 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Post A Car</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Post A Home</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form class="form-group" @submit.prevent="createCar">
+            <form class="form-group" @submit.prevent="createHouse">
               <input type="text"
                     class="form-control"
                     aria-describedby="helpId"
-                    placeholder="Make"
-                    v-model="state.newCar.make"
+                    placeholder="Bedrooms"
+                    v-model="state.newHouse.bedrooms"
               >
               <input type="text"
                     class="form-control"
                     aria-describedby="helpId"
-                    placeholder="Model"
-                    v-model="state.newCar.model"
+                    placeholder="Bathrooms"
+                    v-model="state.newHouse.bathrooms"
               >
               <input type="text"
                     class="form-control"
                     aria-describedby="helpId"
                     placeholder="Description"
-                    v-model="state.newCar.description"
+                    v-model="state.newHouse.description"
               >
               <input type="text"
                     class="form-control"
                     aria-describedby="helpId"
                     placeholder="ImgUrl"
-                    v-model="state.newCar.imgUrl"
+                    v-model="state.newHouse.imgUrl"
               >
               <input type="number"
                     class="form-control"
                     aria-describedby="helpId"
                     placeholder="Year"
-                    v-model="state.newCar.year"
+                    v-model="state.newHouse.year"
               >
               <input type="number"
                     class="form-control"
                     aria-describedby="helpId"
                     placeholder="Price"
-                    v-model="state.newCar.price"
+                    v-model="state.newHouse.price"
+              >
+              <input type="number"
+                    class="form-control"
+                    aria-describedby="helpId"
+                    placeholder="Levels"
+                    v-model="state.newHouse.levels"
               >
               <button type="submit" class="btn btn-info btn-block">
-                Create Car
+                Create House
               </button>
             </form>
           </div>
@@ -67,38 +73,41 @@
     </div>
 
     <div class="row justify-content-around">
-      <car-component v-for="car in cars" :key="car._id" :car-prop="car" />
+      <house-component v-for="house in houses" :key="house._id" :house-prop="house" />
     </div>
   </div>
 </template>
 
 <script>
 import { computed, onMounted, reactive } from 'vue'
-import { carsService } from '../services/CarsService'
-import CarComponent from '../components/CarComponent'
+import { houseService } from '../services/HouseService'
+import HouseComponent from '../components/HouseComponent'
 import { AppState } from '../AppState'
+
 export default {
-  name: 'CarsPage',
-  components: { CarComponent },
+  name: 'HousesPage',
   setup() {
     const state = reactive({
-      newCar: {}
+      newHouse: {}
     })
     onMounted(() => {
-      carsService.getAllCars()
+      houseService.getHouses()
     })
     return {
       state,
-      cars: computed(() => AppState.cars),
-      createCar() {
-        carsService.createCar(state.newCar)
+      houses: computed(() => AppState.houses),
+      createHouse() {
+        houseService.createHouse()
       }
     }
+  },
+  components: {
+    HouseComponent
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   input, button {
     margin-top: .5em;
   }

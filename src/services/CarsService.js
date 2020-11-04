@@ -25,7 +25,7 @@ class CarsService {
 
   async removeCar(carId) {
     try {
-      if (window.confirm()) {
+      if (window.confirm('Are you sure?')) {
         await api.delete('/cars/' + carId)
         router.push({ name: 'Cars' })
       }

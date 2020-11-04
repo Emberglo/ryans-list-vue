@@ -1,5 +1,5 @@
 <template>
-  <div class="car-component col-3 card">
+  <div class="car-component col-3 bg-light border-rounded shadow m-2 d-flex flex-column">
     <h3>
       {{ carProp.make }} {{ carProp.model }}
     </h3>
@@ -16,8 +16,6 @@
          class="img-fluid"
          @click="setActiveCar"
     > -->
-
-    {{ carProp }}
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="active-car col-6 offset-3 card text-center">
+  <div class="active-car col-6 offset-3 mt-5 card text-center">
     <img :src="car.imgUrl" class="img-fluid" alt="">
     <h3>{{ car.make }} {{ car.model }}</h3>
     <p>{{ car.price }} {{ car.year }}</p>
